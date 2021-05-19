@@ -19,7 +19,7 @@
 }
 
 #map svg path[id^="Venue"]{
-    opacity: 0.4;
+    opacity: 1;
 }
 
 #map svg path[id^="Path"] {
@@ -32,9 +32,9 @@
         allVenues = document.querySelectorAll('path[id^="Venue"]');
         
         for (let i = 0; i < allVenues.length -1; i++) {
-            allVenues[i].style.opacity = 0.4;
-            allVenues[i].setAttribute("fill", "#919191");
-            allVenues[i].setAttribute("stroke", "#ffffff");
+            allVenues[i].style.opacity = 1;
+            allVenues[i].setAttribute("fill", "#FCC8A4");
+            allVenues[i].setAttribute("stroke", "#FCC8A4");
         }
 
         allPaths = document.querySelectorAll('path[id^="Path"]');
@@ -53,11 +53,14 @@
         
         myPath = document.querySelector('path[id="Path - '+venue+'"]');
         
-        if (myPath !== null)
-        myPath.style.display = "block";
+        if (myPath !== null){
+            myPath.style.display = "block";
+            myPath.setAttribute("stroke","#24489F");
+        }
 
-        myVenue.setAttribute("fill", "#ff0000");
-        myVenue.setAttribute("stroke", "#000000");
+
+        myVenue.setAttribute("fill", "#24489F");
+        myVenue.setAttribute("stroke", "#24489F");
         myVenue.style.opacity = 1;
     }
     clearVenues();
@@ -140,6 +143,12 @@
         <br><a onclick="select(this.innerHTML);">EPIC</a>
         <br><a onclick="select(this.innerHTML);">LOF</a>
         <br><a onclick="select(this.innerHTML);">Masselow's</a>
+    </div>
+
+    <div id="map-detail">
+        <h3></h3>
+        <h4>Hours</h4>
+        <div class="hours"></div>
     </div>
     <!-- end of svg -->
     </body>
