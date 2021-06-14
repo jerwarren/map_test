@@ -3,7 +3,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <script src="svg-pan-zoom.js"></script>
     </head>
-    <body onload="clearVenues();">
+    <body onload="clearVenues(); setupZoom();">
 
         <style>
         #map {
@@ -31,13 +31,26 @@
         }
 
         #mapContainer {
-            overflow: scroll;
             height: 100vh;
             width: 100vw;
         }
         body {
             padding: 0;
             margin: 0;
+        }
+
+        .button {
+            background-color: blue;
+            color: white;
+            border-radius: 50px;
+            padding: 15px;
+            text-transform: uppercase;
+        }
+
+        #map-legend {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
         }
         </style>
         <script>    
@@ -79,25 +92,7 @@
                 myVenue.setAttribute("stroke", "#24489F");
                 myVenue.style.opacity = 1;
             }
-            clearVenues();
-            function setupGestures(){
-                var myElement = document.getElementById('mapContainer');
-
-                // create a simple instance
-                // by default, it only adds horizontal recognizers
-                var mc = new Hammer(myElement);
-                var pinch = new Hammer.Pinch();
-                mc.add([pinch]);
-
-                // listen to events...
-                mc.on("pinchin pinchout", function(ev) {
-                    console.log(ev)
-                    console.log(ev.type +" gesture detected.");
-                    amount = ev.deltaY / 100;
-                    zoom = zoom + amount;
-                });
-                console.log(zoom)
-            }
+            
             function setupZoom(){
                 var svgElement = document.querySelector('#mapContainer svg');
                 var panZoom = svgPanZoom(svgElement)
@@ -1732,7 +1727,10 @@
                 </svg>
                 
         </div>
-    
+        <div class="button" id="map-legend">
+            legend
+        </div>
+        
         <div id="map-nav">
             <a onclick="select(this.innerHTML);">VIP Venue</a>
             <br><a onclick="select(this.innerHTML);">Turf Club</a>
@@ -1745,12 +1743,6 @@
             <br><a onclick="select(this.innerHTML);">EPIC</a>
             <br><a onclick="select(this.innerHTML);">LOF</a>
             <br><a onclick="select(this.innerHTML);">Masselow's</a>
-        </div>
-
-        <div id="map-detail">
-            <h3></h3>
-            <h4>Hours</h4>
-            <div class="hours"></div>
         </div>
     
     </body>
