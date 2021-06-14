@@ -42,6 +42,8 @@
         </style>
         <script>    
             var zoom = 1;
+            var myElement = document.getElementById('mapContainer');
+
             function clearVenues(){
                 allVenues = document.querySelectorAll('path[id^="Venue"]');
                 
@@ -79,7 +81,6 @@
             }
             clearVenues();
             function setupGestures(){
-                var myElement = document.getElementById('mapContainer');
 
                 // create a simple instance
                 // by default, it only adds horizontal recognizers
@@ -91,9 +92,11 @@
                 mc.on("pinchin pinchout", function(ev) {
                     console.log(ev)
                     console.log(ev.type +" gesture detected.");
+                    amount = ev.deltaY;
                     zoom = zoom + (ev.deltaY / 100);
                 });
                 console.log(zoom)
+                myElement.style.zoom = zoom;
             }
 
         </script>
