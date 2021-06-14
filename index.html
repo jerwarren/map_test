@@ -41,6 +41,7 @@
         }
         </style>
         <script>    
+            var zoom = 1;
             function clearVenues(){
                 allVenues = document.querySelectorAll('path[id^="Venue"]');
                 
@@ -90,8 +91,9 @@
                 mc.on("pinchin pinchout", function(ev) {
                     console.log(ev)
                     console.log(ev.type +" gesture detected.");
-                    myElement.style.zoom = myElement.style.zoom + ev.deltaY;
+                    zoom = zoom + (ev.deltaY / 100);
                 });
+                console.log(zoom)
             }
 
         </script>
