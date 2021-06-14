@@ -79,6 +79,7 @@
 
                 // listen to events...
                 mc.on("tap pinchin pinchout panleft panright", function(ev) {
+                    console.log(ev)
                     console.log(ev.type +" gesture detected.");
                 });
             }
