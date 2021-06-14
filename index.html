@@ -30,6 +30,15 @@
             display: none!important;
         }
 
+        #mapContainer {
+            overflow: scroll;
+            height: 100vh;
+            width: 100vw;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+        }
         </style>
         <script>    
             function clearVenues(){
@@ -78,9 +87,10 @@
                 mc.add([pinch]);
 
                 // listen to events...
-                mc.on("tap pinchin pinchout panleft panright", function(ev) {
+                mc.on("pinchin pinchout", function(ev) {
                     console.log(ev)
                     console.log(ev.type +" gesture detected.");
+                    myElement.style.zoom = myElement.style.zoom + ev.deltaY;
                 });
             }
 
