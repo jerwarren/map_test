@@ -54,6 +54,7 @@
         }
         </style>
         <script>    
+            var panZoom;
             var zoom = 1;
             var myElement = document.getElementById('mapContainer');
 
@@ -95,7 +96,7 @@
             
             function setupZoom(){
                 var svgElement = document.querySelector('#mapContainer svg');
-                var panZoom = svgPanZoom(svgElement)
+                panZoom = svgPanZoom(svgElement)
             }
 
         </script>
@@ -1727,10 +1728,13 @@
                 </svg>
                 
         </div>
-        <div class="button" id="map-legend">
+        
+        <!--
+            <div class="button" id="map-legend">
             legend
         </div>
-        
+    -->
+        <!--
         <div id="map-nav">
             <a onclick="select(this.innerHTML);">VIP Venue</a>
             <br><a onclick="select(this.innerHTML);">Turf Club</a>
@@ -1744,6 +1748,6 @@
             <br><a onclick="select(this.innerHTML);">LOF</a>
             <br><a onclick="select(this.innerHTML);">Masselow's</a>
         </div>
-    
+    -->
     </body>
 </html>
