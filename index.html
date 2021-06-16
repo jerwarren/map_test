@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <script src="svg-pan-zoom.js"></script>
+        <script src="panzoom.min.js"></script>
     </head>
     <body onload="clearVenues(); setupZoom();">
 
@@ -54,9 +54,6 @@
         }
         </style>
         <script>    
-            var panZoom;
-            var zoom = 1;
-            var myElement = document.getElementById('mapContainer');
 
             function clearVenues(){
                 allVenues = document.querySelectorAll('path[id^="Venue"]');
@@ -95,8 +92,17 @@
             }
             
             function setupZoom(){
-                var svgElement = document.querySelector('#mapContainer svg');
-                panZoom = svgPanZoom(svgElement)
+                const elem = document.getElementById('mapContainer')
+                const panzoom = Panzoom(elem, {
+                maxScale: 5
+                })
+                panzoom.pan(10, 10)
+                panzoom.zoom(2, { animate: true })
+                elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
+
+                // Panning and pinch zooming are bound automatically (unless disablePan is true).
+    
+                
             }
 
         </script>
