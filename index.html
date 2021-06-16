@@ -6,13 +6,6 @@
     <body onload="clearVenues(); setupZoom();">
 
         <style>
-        #map {
-            float: left;
-            max-height: 100vh;
-        }
-        #map svg {
-            height: 100%;
-        }
 
         #map-nav {
             width: 200px;
@@ -20,23 +13,23 @@
             position:fixed;
             right: 0;
             top:50px;
+            background-color: white;
         }
 
-        #map svg path[id^="Venue"]{
+        svg path[id^="Venue"]{
             opacity: 1;
         }
 
-        #map svg path[id^="Path"] {
+        svg path[id^="Path"] {
             display: none!important;
         }
 
-        #mapContainer {
-            height: 100vh;
-            width: 100vw;
-        }
         body {
             padding: 0;
             margin: 0;
+            width: 100vw;
+            height: 100vh;
+            position:fixed;
         }
 
         .button {
@@ -54,6 +47,8 @@
         }
         </style>
         <script>    
+            var elem;
+            var panzoom;
 
             function clearVenues(){
                 allVenues = document.querySelectorAll('path[id^="Venue"]');
@@ -92,21 +87,28 @@
             }
             
             function setupZoom(){
-                const elem = document.getElementById('mapContainer')
-                const panzoom = Panzoom(elem, {
-                maxScale: 5
+            
+                elem = document.querySelector('svg');
+                panzoom = Panzoom(elem, {
+                    maxScale: 2,
+                    minScale: 1,
+                    contain: 'outside',
+                    panOnlyWhenZoomed: true
                 })
-                panzoom.pan(10, 10)
-                panzoom.zoom(2, { animate: true })
-                elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
+                panzoom.pan(50, 50)
+                
+                setTimeout(function(){
+                    panzoom.zoom(0.1, { animate: true })
+                })
 
                 // Panning and pinch zooming are bound automatically (unless disablePan is true).
-    
+                elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
+
+
                 
             }
 
         </script>
-        <div id="mapContainer">
             <svg width="1236" height="2029" viewBox="0 0 1236 2029" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g id="Cleaned up map" clip-path="url(#clip0)">
                 <rect width="1236" height="2029" fill="#585757"/>
@@ -1732,15 +1734,12 @@
                 <image id="image0" width="349" height="400" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV0AAAGQCAYAAAAN/rPdAAAACXBIWXMAAC4jAAAuIwF4pT92AAAWl0lEQVR4Xu3d63LbSJKA0aLsnn3/x91p25wf7mqlklWoAiWlRemcCARAALwIG/qUhtSzl+v12gCo8bQ6AYC38311wkdzuVwuq3OAr+P6YP9cv3yEzyukQIWPEOjy6Aos8JFUh/jdo3tHZM+eD3DkVOTeO8LvFt3N2O6c0505F/h6zsRsee57xffNo7uI7ezYmaCeORf4/M5EbHbu9DXeOr5vFt2D2I727+47cxz42lYxGx3f3fdm8X11dE/E9rWPj5w5F3hcZ4KVz33t4987XxnNV0V3EtyjeJ7dHj0e2TkHeHw7wTqK59nt0eNXhffu6G4E95LWo32r80ePV/uBr2H3/uw1rUf7jo7l7d877oznXdEdBHc1tV7S9pl1t4o88HWMwrWK7c56FdwX73FPeE9HdzO4s9jubI/WeXv0GPhajm4D7IZ1Zzuu8/bp8J6K7ong5u3R453zulGE8zHgaxhFaxbHHNLR453zWljn7VPh3f4fvDkI7mi9Cu1qaYPtuM7bwNcziuAslrtLd0mPo2s+frlcLrvh3Y5uchTg1fK0ua8NtuM6bwNfx73B/bW5Lwf0JrSDx1u2orv4W9xVcJ8G23k9C+8ownHdiS98DaMY5vVs+dV+dyaG9lf73Y8Y3l9trIe3b7+wO+1uRTeZTZw7od3ZPgrv7L2BryOGbSe2ObI9vj24Pab9nPh6OcD9eHzeMrTRMrppys3RG0VxNM2ulrPxbWGdt4HP62xwc2zjdlx6W3pk+3lPYV8Ug/tveHem3WV0D6yCG7e/hX2jx0chXkV3FFwRhs9hFLDrYL2K7Wz52W7bEl97Fd7TDqO7mHLj/hze0fKtPcd2tu7bo3Dn4IoufH6r6Obt0WT7s72MbFxfwuOu7+v6eV38TJd2ctq9d9IdTZ2z+ObYzpajCXgV3v74yOo48GetJsd4fCe4eaLt65/td0/6lNuDG7f76+bWXdvLlqw+841pdA+m3Floj6bbuHyfbK/iOwp7G6wzsYXHMgvZdbDOyyq2ffnRbtsSg9va7ecYTbw5xstp9zWTbl+P4juabL+358jm7Rzge8Obt4HHlyfcvj4b3B/tZXB/tNuWdPk983kvInvGmejmsI3Cm6fcvv6+ucxuO+To9u02WOdt4HHNgtvX/ZZCjm6ebH+23z3ZDe63sN2Xfm6ecFvYv7QT3Z3Y5uDOptzvrbW/Jusc3u/hdUy78DXdM+X2CbdPtn26zYPcLLhH7xOfc1d8h9E9+C/Q/j0lrHtwR/HNtw/+Ssv3tD2bele3GdpgDXwOowl3Ftw85f5ot8HNzery6z6F17+Ex5e0Hprd192ZdFsbT5E5fLMpdzTp9uU/7TbAo/DGiTdfsHzhVtFdHQdqHU6G6fgouH09uofbl7/b7ZS7es0c3x7avuTwHka4241ua7dT5WiZ3WKYBfc/7WV8V+HdnXY7gYXHlON1DescyNGUOwru3+12SMuvGV8r9qZPu3np4e2vs7SK7ihaeaqMwY3hjcHN0+5/0jKbeuPzV9NuC+tOdOEx7UR3NuX2e7l/t+dbCzG4sQs5tN/T49ibGN6uhzca7fvXKrozOXQxvLuTbpx2Y3zzPd98q2I26QovfA47wc2T6ejvcHtsczPia8Vw9+XbP68xm3Rb2N6abqOb6G7+f4fo2zG2eT27r5vv5/bg/l/aH28zzKKbL+QsvMBjug7Wo1iufnn29PySh9GOrfnZbru2mnZfhHj0y7TdSXdU+LidP1iedr8Plhzc2cQ7iu639J6iC5/TKrr5l2c9urMJN75Gno77khs2C27fvoZ9y8l3N7ojl8EyCu5s2h39Yq3HN0d3FN4cXeGFz2UW3Dzpjm4r5Gj258fJ9q/B8/J0nMOde3PaUXRHLzp6w1l84wc/us0wurc7usUQf6F2dDG6uy8K8CHEqfHabqMblxzOUXBHtxO+T54Xh7ujxvQlT7ijfa21t5l043YPbpxE4y2B0a2G2S/XZtPu6II8td/yRekEGB7DKFQ9mK09T7hxyu3r/C/hGNxRbPO/onNbRoNdS9unnYnuaIqchTd+4Bzc2bQ7iu/sFsNq0hVeeDyz4Pb1bNLN92JnwY3n/mgve3SmLaPOXNrG/dzWzkU3m8U2BzeP62cCHP+jiaMLM5t0hRYe0+jWQmu3f7Uwi258XjxvFtrclVl4jwa7LWejm6OW96/i+y0tObyzAOfoxgu0e0HuvkhAiXsm3aMJN96CmAV3NMjNYnvUvq0pt7Xz0c1y6HJwR+GdBXgU39ESL1J8H9GFx7Yb3Tjt5um2nzu6nbAKbXyto4HuVS1ZRXcWsfzGZ8P7LW3vhPevNr5g+T1Hnwt4LKPbC6NJd/R9n6M7+3Ow2YR7FNxuFN9L+/3efT20iu5K/kCrZWfanU3Acb0b3TZ4DHxsOVg70Y3n/Wrrpoxiu1pa2r7Li+hO/nd0d94gnjP6gDm8owCvJuDZReuvFd+vhTXwmPKthdaeby3k+OUYrybao6l2Ftidplxa+qGR/1Pg10660ewD5tjG4Mbt2UWaBbevZxespW3gccxuL1zCOp/fo9t/uTZrSm5Q7lNrL18/d+VV7olu/lD5w4wiOFtG0Rz9RMrL6AKuPhfwWK6D9a/wOJ531Iud7hwt0as7c090W5t/kGz0AUfL6CIdPR4de/XFAD6UUXTjum/36O504yisq3bsdu/QvdHtjn4K7AZ3Zzm6WPlYC+u8DXx8PaqX9vKWQmu/v9/zXy3sdGJnaWk96sno8Slnohs/xOx4XI+OxcdHS55gZ8dmF7mFNfBY+vduDm73FI6PInzUj1ErulEzdnrSXyt/zqEz0b1HjuDqCx1Fc3SRdi7k0UUCHttRD1q7PRafF83a8m7eO7pHZl/oKqiji3h0wYHHs/pLhdbWjVg15o+oiu4okrNjo3Xffs0F/WMXGdgS/3kev19jePv2rAXxubOOxO3ZsXfzXtEdhW8Ww9mxVUTzeX27/CICbyKHNu7Lv1wbid//b9Gfd+nHU/tYdr7QUYyPog08nqMIHsU122lKqfeadHfsXIzZ1Hr0E2t0fPU+wMeQbzHM/oKhH19tj+y0591UTLqrL251PBqdu3r+6jjwcay+X+9pQLQ6d3X81Sqie4+3+sLf6nWAOm/1fftWr/Om3ju6r/mi462CM69z5lzgYzvz/RxbceZ52Wueu/Te0QUg+FPRfdefJAAb/kiH/lR0Ab4k0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1BIdAEKiS5AIdEFKCS6AIVEF6CQ6AIUEl2AQqILUEh0AQqJLkAh0QUoJLoAhUQXoJDoAhQSXYBCogtQSHQBCokuQCHRBSgkugCFRBegkOgCFBJdgEKiC1DoT0X3ujoB4J39kQ79qegCfEnvHd3X/CS5hvWZ1zlzLvCxnfl+jq0487zsNc9deu/o3uutvui3eh2gzlt9377V67ypiuiuvvDV8Wh07ur5q+PAx7H6fr2nAdHq3NXxV/u+OuEd7dw2iMdn29G1tXYJ67gfeCyrWwVn+xCPr855NxWT7hk7FyP+H2K0nc8DHs/o+3n2vX9kpyml3mvSnUXw6CfWLJqri3Ztz1NtPy8/jvuAj2n0fZ6//1ctmMX4nv68S6zfK7pZvmizi5gv2Oh5eem3E1ra7o/j84HHMGpB3s7L0XPzsb49O/ZuqqI7MrqIcXu1xNeJ4j3dkosIvItZE+LxnaUdbJd77+iOvtD8xY4uYmvj561eC/g8Zg046sGsH92oP6PXejdnorv6MPmLHR2Lj4+WX2mdj13+Wbd2+8vAa7u95QA8jlEkcwNWjZgdy0uUH8d9o2PxnKPjL5yJ7sjsQ1/b7YddffFHy9HF+9Wew3ttt38ytn0xgA9l1JBVC1YtOVpaWud93auacm90dz/E7AsZXay45H3x8aW9nF4vizXwmEb9GPVhpxtx305wR3a7d+ie6K4+4OyLmsV2tO9oyTGNk+0syMBjiV2ZteNnW/di1phVm+ISXSfrbfdEdyZ/wPih8hc6+kn082D7qd0Gtb/2pT3fXojnCC48ttyQ1sbdyMuqKblBuU8trPv26bjOvIju9Xq9Xi6XWdiOzD5g/okRv7jRT6R8kXpwR9Htr9d/qTaadNvgMfCx5cDNOjKL7lF845JjG5eWtvvjlZtzrtfri32vnXRXgZ1dqJ0LFqMbY9pfK8fY7QX4PHLsdqL7o40bchTkPPEeLS1t32UV3Wt7ec807s8XJe6PF2YW21l4f7TWvrWXUe3ia/djObytjWMrwPCxjWI2akvsSuzGbJkFdxbfUYRbWPft/HlH591YRXclf6Cd4B5NuT24R9Htz59Nuq2JLjyi3ejGDuR+7IZ3FNzd8B5GdeVsdGdvmD9cvjBHU228WDG4o1sK8XVidEe/SOuPgccTOxO7MxrmcnT/DssovkfTbwzvaMlOR/hsdKNc/qPY9guTL1C+UKNfmsXXy1OwSRc+j1nU+nrWmKPojgKcwxv7tBPfFtannYnutb0MYV+fvSj54sxCGl8zRvep3U7Ds0m3E1x4DKtpMoYwD3Or6O4GeBbcNtjutiN8JrrZLLjxA88m3Lj08B4Ftz83x3k26bYmtPDoctRmQ12Obgzvf9s8uDG8eeLNLZuF97Sj6F7bbbjym+d9OZR50h1NuatbCvF5+Z7v0V8uiC48tjxR5sbkoWw27f43LLNpN0+6Mb556Ub74rGht5h084XIP33yBfnWnoOb7+P21x39BIvB/dZuo9sGa+CxzcLbg5j/Jd17MYpuDu4svDG+o2l3Ftotu9Htb3BpL99w9pPnKJp9+bvd3hLI8f7Zfn/G+Lz8VwuiC5/XKrqrf03HWwz/314GON9m6PEdBTeHtx1sH7qJ7uA/Bb62l1NovufaP9BTe/kBZ1Pu6F5sly9gDu7s+aPwdgIMjyXHazTkjQa0o2k3T7xx8j2adnPgc3jbwfbNfwLc2v6km40KHy9AvhA/2vGEOruA39pzePNfLRzdz+0EFx7TTnjzkBf/Zf2zvbyNEEN79Mu1ndsLLW2fsorutd2GK+7LF6BPu/2Lf2rPwc3hja/Xlzjh/mgvJ92dv1oQXfgcdqK7GvTibYa+juH9bzovBjuGNwY+x3YU3sMYr6Ib9Re6tNsv/OgC9OCObie08NyfrbW/2nN0c3CPptz4mqvQro4DtVYTY45cbk5fx2n3KLyjaffMpJvjm0N8aDe61/Zyuh2F99c/+/sX3WN4FMgY6jjlzn55tjPliip8LtfBejXsjcIbo5u3j+7rzsLbwjpvTw2jO/nf1X1xSnsZ3l/h8Sy+Obb93L6OF6nfy40T7plfoAkvfA6jqOX45fD2WMaIzqbeuI63F0axjdstrIdGv0RrbW/S7YHt2609B7bvi7Hty89wbo5gvlA5uLMpt79WvC8suvB5zaLb1zmKo2l3NvWOltmUezTpjj7j1E50u6P4jsLbj/f4dvn8eIFG93BNufC1zcKblxzJn+1lX/I0+2OyHZ87Cm5L2/3xljPRjXqARxfgVzhvFdzv/6y/tefo3hvcWWxFGB7LLGDXwfpseHOA83accvt69D4trE+ZRjfd182Rjdv9eIxtPyeaXZjVdDv6i4WWtvvjI6vjwJ+1ilhuTo7vr3bbl1V8R6HNU+5o2s3v3cJ6ej+3tddNut3OxHttv4Maz4kXI8b2W3uO7E5wRzEVWPgcRvGaBW8U3mt7GdE8xR7FNkd21LnTDqN7MO3GqMU3HsU2H38K61//rH+29XR75raC6MLnsIpuX+flaOodTcD5cQ73LLT5sxxOua3dP+m2Nr4YPaI9vDnOcRkFdhXb2YQrsvA15CGur2fLKKCrEMfz4voovtuW0V1Mu6vwxufFi3BvbAUXOBveVXxH2/l5o+Dm9XLKbW0jugM5vH1f1IMbI9k/bN/OcV4Ftw3WnfDC15BbMwrgKrw5wruhje99E9xdW9E9+C/U+hvOpt7WXgb42p7v6V7ay+DG82Jcj4IrtvA1HQXwOtg+CupRZHNwc3z/tTPltrYZ3YEezfw4v2nfH5fRPsEFzro3vDtLfl4L624rstllM86ttdYG0+4ogqNwjh7vnNeNopuPAV/DKFqjMK4Cuhva2Ws/PzgR0lPRbe1UePv67PZonbdHj4Gv5WjyzKGcRXRnO67z9qngtnZHdFvbDm/c3gnrUXBHj2f7gM9vFK5ZhM+sV5F9VXBbuzO6rQ3D29o8uLN9q/NHj1f7ga9hFq9VfEf7jo7l7d877ozn3dFtbSu8+fHZ7dHjkZ1zgMe3E6xZdO/ZHj2+O7itvTK6rU3D29o6nmcfHzlzLvC4zgRrFc+zj3/vfGU0Xx3d7kR8z+w7cxz42lYxGx3f3ffq2HZvFt1u8f/m50yYZ86cC3x+ZyI2O3f6Gm8V2+7No9st4tvtnNOdORf4es7EbHnuW8e2e7fodpvxjc6eD3DkVOTeK7bdu0c3uyPCAO/mvSOblUd3RIiBCtWBHfkQ0T1DoIHoI4T0jIeLLsAje1qdAMDbEV2AQqILUOh/U9LbzuDfW74AAAAASUVORK5CYII="/>
                 </defs>
                 </svg>
-                
-        </div>
-        
-        <!--
+                        
+
             <div class="button" id="map-legend">
             legend
         </div>
-    -->
-        <!--
+
         <div id="map-nav">
             <a onclick="select(this.innerHTML);">VIP Venue</a>
             <br><a onclick="select(this.innerHTML);">Turf Club</a>
@@ -1754,6 +1753,5 @@
             <br><a onclick="select(this.innerHTML);">LOF</a>
             <br><a onclick="select(this.innerHTML);">Masselow's</a>
         </div>
-    -->
     </body>
 </html>
