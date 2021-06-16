@@ -77,22 +77,22 @@
                     var rect = myVenue.getBoundingClientRect();
                     var x = rect.left + rect.width/2;
                     var y = rect.top + rect.height/2;
+                    var mid_y = window.innerHeight / 2;
+                    var mid_x = window.innerWidth / 2;
+                    var offset_x = (mid_x - x)/2;
+                    var offset_y = (mid_y - y)/2;
+                   
+                    console.log(mid_x, mid_y, offset_x, offset_y)
+                    panzoom.zoomToPoint(2, { clientX: x, clientY: y});
                     setTimeout(function(){
-                        panzoom.zoomToPoint(2, { clientX: x, clientY: y, animate: true});
-                    }, 500)
+                        panzoom.zoomToPoint(3, { clientX: x, clientY: y});
+                        setTimeout(function(){
+                            panzoom.pan(offset_x, offset_y, {relative: true});
+                        }, 5)
+                    }, 5)
                     
-                }, 100)
+                }, 150)
                 
-
-               
-                /*
-                myPath = document.querySelector('path[id="Path - '+venue+'"]');
-                
-                if (myPath !== null){
-                    myPath.style.display = "block";
-                    myPath.setAttribute("stroke","#24489F");
-                }
-                */
 
                 myVenue.setAttribute("fill", "#24489F");
                 myVenue.setAttribute("stroke", "#24489F");
@@ -116,12 +116,12 @@
                 elem.addEventListener('panzoomchange', (event) => {
                 })
 
-                venues = document.querySelectorAll('svg path[id^="Venue"]');
+               /*  venues = document.querySelectorAll('svg path[id^="Venue"]');
                     venues.forEach(function(venue){
                         venue.addEventListener("click", (event) => {
                             panzoom.zoomToPoint(2, { clientX: event.clientX, clientY: event.clientY });
                         })
-                })
+                }) */
                 
                 
                 
