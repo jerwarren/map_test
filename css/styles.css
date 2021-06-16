@@ -1,0 +1,98 @@
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100vw;
+    background-color: #003268;
+    z-index: 10;
+    color: white;
+}
+#map-nav {
+    right: -400px;
+}
+#map-nav.open {
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid black;
+    position: fixed;
+    top: 50px;
+    background-color: white;
+    right: 0;
+    top: 50px;
+    height: 100vh;
+    z-index: 10;
+    animation: slide-up ease 0.25s;
+    overflow-y: scroll;
+}
+
+#map-nav ul {
+    list-style-type:none;
+    width: 100%;
+    padding: 0;
+}
+
+#map-nav ul li {
+    height: 72px;
+    padding: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+#map-nav ul li .material-icons {
+    font-size: 2em;
+    float: left;
+}
+#map-nav ul li a {
+    font-size: 16px;
+}
+
+svg path[id^="Venue"] {
+    opacity: 1;
+}
+
+svg path[id^="Path"] {
+    display: none !important;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+
+.button.fab {
+    background-color: #003268;
+    color: white;
+    border-radius: 50px;
+    padding: 15px;
+    text-transform: uppercase;
+    border: none;
+}
+
+#map-legend {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+#map-legend .label {
+    padding-top: 5px;
+    padding-left: 10px;
+    float: right;
+}
+
+#map-legend .material-icons {
+    float: left;
+}
+
+
+
+@keyframes slide-up{
+    0% {
+        transform:  translate(0px,100vh);
+    }
+    100% {
+        transform:  translate(0px,0px)  ;
+    }
+}
