@@ -61,45 +61,78 @@
 
                 allPaths = document.querySelectorAll('path[id^="Path"]');
                 for (let i = 0; i < allPaths.length; i++) {
-                    console.log(allPaths[i])
                     allPaths[i].style.display = "none";
                 }
             }
 
             function select(venue){
                 
-                console.log(venue)
                 clearVenues();
                 venue = venue.replace("&amp;", "&");
-                myVenue = document.querySelector('path[id="Venue - '+venue+'"]');
+
+                myVenue = document.querySelector('svg path[id="Venue - '+venue+'"]');
+                panzoom.zoom(0.1);
+
+                setTimeout(function(){
+                    var rect = myVenue.getBoundingClientRect();
+                    var x = rect.left + rect.width/2;
+                    var y = rect.top + rect.height/2;
+                    setTimeout(function(){
+                        panzoom.zoomToPoint(2, { clientX: x, clientY: y});
+                    }, 200)
+                    
+                }, 200)
                 
+
+               
+                /*
                 myPath = document.querySelector('path[id="Path - '+venue+'"]');
                 
                 if (myPath !== null){
                     myPath.style.display = "block";
                     myPath.setAttribute("stroke","#24489F");
                 }
-
+                */
 
                 myVenue.setAttribute("fill", "#24489F");
                 myVenue.setAttribute("stroke", "#24489F");
                 myVenue.style.opacity = 1;
             }
+            function getPositionXY(element) {
+                var rect = element.getBoundingClientRect();
+                var x =rect.left + (rect.width/2);
+                var y = rect.top + (rect.height/2);
+                document.elementFromPoint(x, y).click();
+            }
             
             function setupZoom(){
-            
+                parent = document.querySelector("body");
                 elem = document.querySelector('svg');
                 panzoom = Panzoom(elem, {
                     maxScale: 2,
                     minScale: 1,
                     contain: 'outside',
-                    panOnlyWhenZoomed: true
                 })
-                panzoom.pan(50, 50)
+                elem.addEventListener('panzoomchange', (event) => {
+                })
+
+                venues = document.querySelectorAll('svg path[id^="Venue"]');
+                    venues.forEach(function(venue){
+                        venue.addEventListener("click", (event) => {
+                            panzoom.zoomToPoint(2, { clientX: event.clientX, clientY: event.clientY });
+                        })
+                })
+                
+                
                 
                 setTimeout(function(){
-                    panzoom.zoom(0.1, { animate: true })
-                })
+                    panzoom.zoom(0.1);
+                    setTimeout(function(){
+                       panzoom.pan(-1225, -1520, {animate: true});
+                    }, 100);
+                }, 100);
+                
+                
 
                 // Panning and pinch zooming are bound automatically (unless disablePan is true).
                 elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
