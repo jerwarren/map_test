@@ -93,4 +93,9 @@ function setupZoom(){
         mapNav.classList.add("open")
         console.log("legend click")
     });
+    document.querySelector("#close").addEventListener('click',function(){
+        mapNav.classList.remove("open");
+        mapNav.classList.add("closed");
+
+    })
 }

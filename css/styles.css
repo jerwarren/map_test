@@ -8,22 +8,41 @@
     z-index: 10;
     color: white;
 }
-#map-nav {
-    right: -400px;
+#map-nav.closed {
+    animation: slide-down ease 0.25s;
+    top: 100vh;
+    z-index: 10;
+    right: 0;
 }
 #map-nav.open {
     max-width: 500px;
     width: 100%;
     border: 1px solid black;
     position: fixed;
-    top: 50px;
     background-color: white;
     right: 0;
-    top: 50px;
+    top: 0px;
     height: 100vh;
     z-index: 10;
     animation: slide-up ease 0.25s;
     overflow-y: scroll;
+    padding-top: 50px;
+}
+
+.venues-header {
+    position:relative;
+    width: 100%;
+    position: fixed;
+    height: 50px;
+    background-color: #003268;
+    top: 0;
+    color: white;
+    font-weight: 400;
+    padding-top: 20px;
+}
+.venues-header i {
+    float: right;
+    padding-right: 10px;
 }
 
 #map-nav ul {
@@ -93,6 +112,15 @@ body {
         transform:  translate(0px,100vh);
     }
     100% {
-        transform:  translate(0px,0px)  ;
+        transform:  translate(0px,0px);
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        transform:  translate(0px,0px);
+    }
+    100% {
+        transform:  translate(0px,100vh);
     }
 }
