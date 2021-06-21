@@ -15,7 +15,7 @@
     right: 0;
 }
 #map-nav.open {
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
     border: 1px solid black;
     position: fixed;
@@ -29,39 +29,79 @@
     padding-top: 50px;
 }
 
-.venues-header {
+.open .venues-header {
     position:relative;
     width: 100%;
     position: fixed;
     height: 50px;
-    background-color: #003268;
+    background-color: #684c00;
     top: 0;
     color: white;
     font-weight: 400;
     padding-top: 20px;
+    z-index: 20;
 }
-.venues-header i {
+.open .venues-header i {
     float: right;
     padding-right: 10px;
 }
 
-#map-nav ul {
+.open #filters-container {
+    width: 100%;
+    max-width: 400px;
+    height: 100px;
+    border: 1px solid red;
+    background-color: lightgrey;
+    min-height: 100px;
+    position: fixed;
+    top: 50px;
+    right: 0;
+    z-index: 20;
+}
+
+.open #venues-container {
     list-style-type:none;
     width: 100%;
     padding: 0;
+    position:fixed;
+    top: 115px;
+    margin-top:0;
+    padding-bottom: 50px;
+    width: auto;
 }
-
-#map-nav ul li {
+.open #filters-container div {
+    float: left;
+    background-color: darkgrey;
+    color: white;
+    border-radius: 30px;
+    height: 17px;
+    margin: 2px;
+    font-size: 14px;
+    padding: 5px;
+}
+.open #filters-container div.selected {
+    float: left;
+    background-color: blue;
+    color: white;
+    border-radius: 30px;
+    height: 17px;
+    margin: 2px;
+    font-size: 14px;
+    padding: 5px;
+}
+#map-nav #venues-container li {
     height: 72px;
     padding: 10px;
-    border-bottom: 1px solid lightgrey;
+    background-color: white;
+   border: 1px solid rgba(0, 0, 0, 0.2);
 }
+#map-nav ul li.selected {
+    background-color: #24489F;
+}
+
 #map-nav ul li .material-icons {
     font-size: 2em;
     float: left;
-}
-#map-nav ul li a {
-    font-size: 16px;
 }
 
 svg path[id^="Venue"] {
@@ -103,6 +143,12 @@ body {
 
 #map-legend .material-icons {
     float: left;
+}
+
+.sizer {
+    width: 100%;
+    max-width: 400px;
+    height: 100px;
 }
 
 

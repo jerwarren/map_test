@@ -2,6 +2,13 @@ var elem;
 var panzoom;
 const mapLegend = document.querySelector("#map-legend");
 const mapNav = document.querySelector("#map-nav");
+const venuesContainer = document.querySelector("#venues-container");
+const filtersContainer = document.querySelector("#filters-container");
+var categories = [];
+var venues = [];
+
+var Shuffle, ShuffleElement, ShuffleSizer, shuffleInstance;
+
 
 function clearVenues(){
     allVenues = document.querySelectorAll('path[id^="Venue"]');
@@ -9,7 +16,9 @@ function clearVenues(){
     for (let i = 0; i < allVenues.length -1; i++) {
         allVenues[i].style.opacity = 1;
         allVenues[i].setAttribute("fill", "lightgrey");
-        allVenues[i].setAttribute("stroke", "lightgrey");
+        allVenues[i].setAttribute("stroke", "black");
+        allVenues[i].setAttribute("stroke-width", "0.5");
+        
     }
 
     allPaths = document.querySelectorAll('path[id^="Path"]');
@@ -19,12 +28,12 @@ function clearVenues(){
 }
 
 function select(venue){
-    
+
     clearVenues();
     venue = venue.replace("&amp;", "&");
 
     myVenue = document.querySelector('svg path[id="Venue - '+venue+'"]');
-    panzoom.zoom(0.1);
+    panzoom.zoom(0.01);
 
     setTimeout(function(){
         var rect = myVenue.getBoundingClientRect();
@@ -48,8 +57,22 @@ function select(venue){
     
 
     myVenue.setAttribute("fill", "#24489F");
-    myVenue.setAttribute("stroke", "#24489F");
+    myVenue.setAttribute("stroke", "#ffbc02");
+    myVenue.setAttribute("stroke-width", "2");
     myVenue.style.opacity = 1;
+}
+
+function categorySelect(filter, element){
+    console.log(filter)
+    var categoryChips = document.querySelectorAll("#filters-container div");
+    console.log(categoryChips)
+    categoryChips.forEach(function(chip){
+        chip.classList.remove("selected");
+    });
+
+    element.classList.add("selected");
+    shuffleInstance.filter([filter]);
+
 }
 function getPositionXY(element) {
     var rect = element.getBoundingClientRect();
@@ -63,7 +86,7 @@ function setupZoom(){
     elem = document.querySelector('svg');
     panzoom = Panzoom(elem, {
         maxScale: 2,
-        minScale: 1,
+        minScale: 0.1,
         contain: 'outside',
     })
     elem.addEventListener('panzoomchange', (event) => {
@@ -91,11 +114,41 @@ function setupZoom(){
     elem.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
     mapLegend.addEventListener('click', function(){
         mapNav.classList.add("open")
-        console.log("legend click")
     });
     document.querySelector("#close").addEventListener('click',function(){
         mapNav.classList.remove("open");
         mapNav.classList.add("closed");
 
     })
+}
+
+function bootstrap(){
+    fetch('tmp-data.json').then(function (response) {
+        return response.json();
+       
+    })
+    .then(function(data){
+        venues = data.venues[0];
+        categories = data.categories[0];
+        venuesString = "";
+        venues.forEach(function(venue){
+            venuesString += `<li class="venue-item sizer" onclick="select('${venue.venueName}');" data-groups='${JSON.stringify(venue.categories).replace("[[", "[").replace("]]","]")}'><i class="material-icons">dining</i>${venue.venueName}</li>`;
+        })
+        categoriesString = "";
+        categories.forEach(function(category){
+            categoriesString += `<div onclick="categorySelect('${category}', this)">${category}</div>`;
+        })
+        venuesContainer.innerHTML = venuesString;
+        filtersContainer.innerHTML = categoriesString;
+
+        Shuffle = window.Shuffle;
+        ShuffleElement = document.querySelector('#venues-container');
+
+        shuffleInstance = new Shuffle(ShuffleElement, {
+        itemSelector: '.venue-item',
+        sizer: document.querySelector(".sizer")
+        });
+        shuffleInstance.filter();
+    })
+
 }

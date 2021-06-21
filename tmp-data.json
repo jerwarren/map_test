@@ -1,0 +1,286 @@
+{
+    "categories": [
+        [
+            "Dining & Bars",
+            "Gaming",
+            "Parking",
+            "Valet",
+            "ATMs & Kiosks",
+            "Concert Venues",
+            "Meeting Venues",
+            "Shopping",
+            "Spa",
+            "Family Entertainment"
+        ]
+    ],
+    "venues": [
+        [
+            {
+                "venueId": "ben-jerrys",
+                "venueName": "Ben & Jerry's",
+                "venueLink": "\/dining-bars\/restaurants\/ben-jerrys",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "center-bar",
+                "venueName": "Center Bar",
+                "venueLink": "\/dining-bars\/restaurants\/center-bar",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "cyber-quest",
+                "venueName": "Cyber Quest",
+                "venueLink": "\/kids-family\/cyber-quest",
+                "venueStatus": "Limited Hours",
+                "categories": [
+                    [
+                        "Family Entertainment"
+                    ]
+                ]
+            },
+            {
+                "venueId": "epic-sports-bar",
+                "venueName": "EPIC Sports Bar",
+                "venueLink": "\/dining-bars\/restaurants\/epic-sports-bar",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "fais-noodle-house",
+                "venueName": "Fai's Noodle House",
+                "venueLink": "\/dining-bars\/restaurants\/fais-noodle-house",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "fatburger",
+                "venueName": "Fatburger",
+                "venueLink": "\/dining-bars\/restaurants\/fatburger",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "kids-quest",
+                "venueName": "Kids Quest",
+                "venueLink": "\/kids-family\/kids-quest",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Family Entertainment"
+                    ]
+                ]
+            },
+            {
+                "venueId": "la-rive-spa",
+                "venueName": "La Rive Spa",
+                "venueLink": "\/spa\/overview",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Spa"
+                    ]
+                ]
+            },
+            {
+                "venueId": "liquid",
+                "venueName": "Liquid",
+                "venueLink": "\/dining-bars\/restaurants\/liquid",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "legends-of-fire",
+                "venueName": "Legends of Fire",
+                "venueLink": "\/dining-bars\/restaurants\/legends-of-fire",
+                "venueStatus": "Limited Hours",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "masselows",
+                "venueName": "Masselow's Steak House",
+                "venueLink": "\/dining-bars\/restaurants\/masselows",
+                "venueStatus": "Limited Hours",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "non-smoking-casino-bar",
+                "venueName": "Non-Smoking Casino Bar",
+                "venueLink": "\/dining-bars\/restaurants\/non-smoking-casino-bar",
+                "venueStatus": "Limited Hours",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "OTB",
+                "venueName": "Off Track Betting",
+                "venueLink": "\/casino\/otb",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Gaming"
+                    ]
+                ]
+            },
+            {
+                "venueId": "qdoba",
+                "venueName": "Qdoba Mexican Eats",
+                "venueLink": "\/dining-bars\/restaurants\/qdoba",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "riverbank-taphouse",
+                "venueName": "Riverbank Taphouse",
+                "venueLink": "\/dining-bars\/restaurants\/riverbank-taphouse",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "spa-boutique",
+                "venueName": "La Rive Spa Boutique",
+                "venueLink": "\/spa\/boutique",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Shopping",
+                        "Spa"
+                    ]
+                ]
+            },
+            {
+                "venueId": "the-marketplace",
+                "venueName": "Marketplace",
+                "venueLink": "\/dining-bars\/restaurants\/the-marketplace",
+                "venueStatus": "Limited Hours",
+                "categories": [
+                    [
+                        "Dining & Bars",
+                        "Shopping"
+                    ]
+                ]
+            },
+            {
+                "venueId": "thomas-hammer",
+                "venueName": "Thomas Hammer Coffee Roasters",
+                "venueLink": "\/dining-bars\/restaurants\/thomas-hammer",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "the-lounge-at-masselows",
+                "venueName": "The Lounge at Masselow's",
+                "venueLink": "\/dining-bars\/restaurants\/the-lounge-at-masselows",
+                "venueStatus": "Limited Hours",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "turf-club",
+                "venueName": "The Turf Club",
+                "venueLink": "\/dining-bars\/restaurants\/turf-club",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Dining & Bars"
+                    ]
+                ]
+            },
+            {
+                "venueId": "windfall",
+                "venueName": "Windfall",
+                "venueLink": "\/shopping\/windfall",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Shopping"
+                    ]
+                ]
+            },
+            {
+                "venueId": "poker-room",
+                "venueName": "The Poker Room",
+                "venueLink": "\/casino\/poker",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Gaming"
+                    ]
+                ]
+            },
+            {
+                "venueId": "valet",
+                "venueName": "Valet",
+                "venueLink": "\/valet",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Valet"
+                    ]
+                ]
+            },
+            {
+                "venueId": "shuttle",
+                "venueName": "The Northern Quest Shuttle",
+                "venueLink": "",
+                "venueStatus": "Open",
+                "categories": [
+                    [
+                        "Parking"
+                    ]
+                ]
+            }
+        ]
+    ]
+}
